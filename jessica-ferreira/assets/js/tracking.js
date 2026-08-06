@@ -10,7 +10,7 @@
     ga4_id: "G-JVBEXFMYC4",
     meta_pixel_id: "1073203531921409",
     ga4_main_event: "generate_lead",
-    meta_main_event: "Lead",
+    meta_main_event: "whatsapp_lp",
     business_city: "Rondonópolis",
     business_state: "MT",
     campaign_region: ""
@@ -232,7 +232,7 @@
       return;
     }
     const metaOptions = { eventID: payload.event_id };
-    if (options.standard || eventName === LP_CONFIG.meta_main_event) {
+    if (options.standard) {
       window.fbq("track", eventName, payload, metaOptions);
     } else {
       window.fbq("trackCustom", eventName, payload, metaOptions);
@@ -325,8 +325,8 @@
 
     trackGA4(LP_CONFIG.ga4_main_event, payload, redirect);
     debugLog("GA4 generate_lead sent", payload);
-    trackMeta(LP_CONFIG.meta_main_event, payload, { standard: true });
-    debugLog("Meta Lead sent", payload);
+    trackMeta(LP_CONFIG.meta_main_event, payload);
+    debugLog("Meta whatsapp_lp sent", payload);
     setTimeout(redirect, 1600);
   };
 
@@ -365,7 +365,7 @@
           form_location: inferButtonLocation(form)
         });
         trackGA4(LP_CONFIG.ga4_main_event, payload);
-        trackMeta(LP_CONFIG.meta_main_event, payload, { standard: true });
+        trackMeta(LP_CONFIG.meta_main_event, payload);
       });
     });
   };
