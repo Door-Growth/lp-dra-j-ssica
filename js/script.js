@@ -2,7 +2,8 @@
 
 document.documentElement.classList.add("js");
 
-const whatsappLink = "https://api.whatsapp.com/send?phone=556699038231&text=Ol%C3%A1%21%20Gostaria%20de%20ter%20mais%20informa%C3%A7%C3%B5es%20sobre%20a%20consulta%20com%20a%20Dra.%20J%C3%A9ssica%20Ferreira%2C%20por%20favor.";
+const whatsappBaseUrl = "https://api.whatsapp.com/send?phone=556699038231";
+const defaultWhatsAppMessage = "Olá! Gostaria de ter mais informações sobre a consulta com a Dra. Jéssica Ferreira, por favor.";
 
 // DEPOIMENTOS ILUSTRATIVOS: substituir por avaliações reais e autorizadas antes da publicação.
 const testimonials = [
@@ -100,8 +101,9 @@ function initBase(reducedMotion) {
   if (year) year.textContent = new Date().getFullYear();
 
   document.querySelectorAll("[data-whatsapp]").forEach((link) => {
-    link.href = whatsappLink;
-    link.target = "_blank";
+const message = link.dataset.whatsappMessage || defaultWhatsAppMessage;
+link.href = `${whatsappBaseUrl}&text=${encodeURIComponent(message)}`;
+link.target = "_blank";
     link.rel = "noopener noreferrer";
   });
 
